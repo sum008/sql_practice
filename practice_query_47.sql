@@ -25,3 +25,11 @@ select id, case when subject = 'english' then (select marks from practice.f_pivo
 		  case when subject = 'science' then (select marks from practice.f_pivot where subject='science' and id=f.id) end as science,
           case when subject = 'maths' then (select marks from practice.f_pivot where subject='maths' and id=f.id) end as maths
 from practice.f_pivot f) b;
+
+--------- optimized --------------------
+
+select distinct id, 
+		case when subject != '' then (select marks from practice.f_pivot where subject='english' and id=f.id) end as english,
+		case when subject != ''  then (select marks from practice.f_pivot where subject='science' and id=f.id) end as science,
+		case when subject != '' then (select marks from practice.f_pivot where subject='maths' and id=f.id) end as maths
+from practice.f_pivot f;
