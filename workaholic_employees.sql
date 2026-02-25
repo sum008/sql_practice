@@ -1,0 +1,1 @@
+select *, logout - login from 'data_sources/workaholic_employees.csv'
